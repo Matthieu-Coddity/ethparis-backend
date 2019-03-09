@@ -8,9 +8,9 @@ from flask import request
 app = flask.Flask(__name__)
 
 @app.route('/', methods=['GET'])
-def home()
+def home():
     return "hello world"
-    
+
 '''
 #route pour ajouter un nouveau produit
 @app.route('/new_product', methods=['POST'])
