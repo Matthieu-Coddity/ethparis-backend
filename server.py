@@ -119,6 +119,7 @@ def erase():
     my_json = request.get_json()
     if my_json.get('erase') :
         init_bdd()
+        save_bdd()
         return flask.jsonify(True)
     else:
         return flask.jsonify(False)
