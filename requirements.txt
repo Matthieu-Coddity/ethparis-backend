@@ -2,3 +2,4 @@ flask
 web3
 flask-cors
 pandas
+gunicorn
