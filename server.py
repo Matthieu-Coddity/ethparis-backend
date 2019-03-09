@@ -19,7 +19,7 @@ bdd = pd.DataFrame()
 #fonction d'initialisation de la bdd pour les test
 def init_bdd():
     global bdd 
-    bdd = pd.DataFrame({"file":["file1","file2"],"licence":[1,5],"price":[1,1]})
+    bdd = pd.DataFrame({"file":[],"licence":[],"price":[]})
     bdd['hash'] = bdd.apply(calcul_hash,axis=1)
 
 #calcul le hash d'un item
