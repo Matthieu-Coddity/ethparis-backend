@@ -5,6 +5,7 @@ import pandas as pd
 from flask import request
 import hashlib
 import base64
+import os
 
 BUFF_SIZE = 65536
 num_file = 0
@@ -120,6 +121,9 @@ def erase():
     if my_json.get('erase') :
         init_bdd()
         save_bdd()
+        for element in os.listdir('.'):
+            if (not os.path.isdir(element)) & (element[0:4] == "new_"):
+                os.remove(element)
         return flask.jsonify(True)
     else:
         return flask.jsonify(False)
