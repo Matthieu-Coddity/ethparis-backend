@@ -1,5 +1,4 @@
 import flask
-import web3
 from flask_cors import CORS
 from flask import request
 import pandas as pd
@@ -114,8 +113,18 @@ def get_price_from_hash():
     else:
         return flask.jsonify(False)
 
+#erase de la base
+@app.route('/erase', methods=['POST'])
+def erase():
+    my_json = request.get_json()
+    if my_json.get('erase') :
+        init_bdd()
+        return flask.jsonify(True)
+    else:
+        return flask.jsonify(False)
 
-#rertourne l'ensemble des pièces et leurs prix (front pour afficher)
+
+#retourne l'ensemble des pièces et leurs prix (front pour afficher)
 @app.route('/all_piece', methods=['GET'])
 def get_all_piece():
     return flask.jsonify(bdd.to_dict("records"))
