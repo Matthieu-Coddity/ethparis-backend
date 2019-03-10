@@ -89,7 +89,32 @@ def get_all_piece():
          l.append(di)
     #jsonify([Users.serialize(user) for user in users]
     return jsonify(l)
-    #return "hello"
+
+#erase de la base
+@app.route('/erase', methods=['POST'])
+def erase():
+    my_json = request.get_json()
+    if my_json.get('erase') :
+        try:
+            num_rows_deleted = db.session.query(Item).delete()
+            db.session.commit()
+        except:
+            db.session.rollback()
+        return jsonify(True)
+    else:
+        return jsonify(False)
+
+@app.route('/price_from_hash', methods=['POST'])
+def price():
+    hash_voulu = request.get_json().get('hash')
+    try: 
+        result = Item.query.filter_by(hash_item=hash_voulu).first()
+        dictio = result.__dict__
+        price = dictio['price_item']
+        return jsonify({'price':price})
+    except:
+        return make_response(jsonify(message=u'probleme'), 500)
+
 
 if __name__ == '__main__':
     app.run()
