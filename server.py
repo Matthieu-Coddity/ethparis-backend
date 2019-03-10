@@ -59,7 +59,7 @@ def add_product():
 
     my_hash = m.hexdigest()
     #ajout du produit à la bdd
-    i = Item(hash_item = my_hash, file_name = file_name, price_item=price,file_item=my_final_b)
+    i = Item(hash_item = my_hash, file_name = file_name, price_item=price)
     print("item created", i)
     try:
         db.session.add(i)
@@ -78,6 +78,18 @@ def get_piece_from_hash():
     result_dict=result.__dict__
     del result_dict['_sa_instance_state']
     return jsonify(result_dict)
+
+
+@app.route('/all_piece', methods=['GET'])
+def get_all_piece():
+    l=[]
+    for u in db.session.query(Item).all():
+         di=(u.__dict__)
+         del di['_sa_instance_state']
+         l.append(di)
+    #jsonify([Users.serialize(user) for user in users]
+    return jsonify(l)
+    #return "hello"
 
 if __name__ == '__main__':
     app.run()
