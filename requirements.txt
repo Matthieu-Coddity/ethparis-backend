@@ -3,4 +3,7 @@ web3
 flask_cors
 pandas
 gunicorn
-
+flask-script
+flask-migrate
+flask-SQLAlchemy
+psycopg2
